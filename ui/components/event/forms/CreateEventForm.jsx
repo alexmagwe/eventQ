@@ -68,10 +68,10 @@ const CreateEventForm = () => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className="text-black flex flex-col md:w-2/3 sm:w-4/5 lg:w-1/2 mx-auto gap-4">
-              <span className="text- font-normal">Event name</span>
+            <Form className="text-black  flex flex-col md:w-2/3 sm:w-4/5 lg:w-1/2 mx-auto md:gap-2 2xl:gap-4">
+              <span className="text-white font-normal">Event name</span>
               <Field
-                className="border-2 p-2  capitalize rounded-md text-slate-800"
+                className="border-2 border-cyan-400 outline-cyan-400  p-2  capitalize rounded-md text-slate-800"
                 type="text"
                 name="name"
               />
@@ -80,11 +80,11 @@ const CreateEventForm = () => {
                 name="name"
                 component="div"
               />
-              <span className="text-md font-normal capitalize">
+              <span className="text-md text-white font-normal capitalize">
                 Event Location
               </span>
               <Field
-                className="border-2 p-2 rounded-md"
+                className="border-2 border-cyan-400 outline-cyan-400  p-2 rounded-md"
                 type="text"
                 name="location"
               />
@@ -93,9 +93,9 @@ const CreateEventForm = () => {
                 name="location"
                 component="div"
               />
-              <span className="text-md font-normal">Event Date</span>
+              <span className="text-md text-white font-normal">Event Date</span>
               <Field
-                className="border-2 p-2 rounded-md"
+                className="border-2 border-cyan-400 outline-cyan-400  p-2 rounded-md"
                 type="date"
                 name="date"
               />
@@ -104,9 +104,9 @@ const CreateEventForm = () => {
                 name="date"
                 component="div"
               />
-              <span className="text-md font-normal">Event Time</span>
+              <span className="text-md text-white font-normal">Event Time</span>
               <Field
-                className="border-2 p-2 rounded-md"
+                className="border-2 border-cyan-400 outline-cyan-400  p-2 rounded-md"
                 type="time"
                 name="time"
               />
@@ -115,9 +115,9 @@ const CreateEventForm = () => {
                 name="time"
                 component="div"
               />
-              <span className="text-md font-normal">Event Duration (hours)</span>
+              <span className="text-md  text-white font-normal">Event Duration (hours)</span>
               <Field
-                className="border-2 p-2 rounded-md"
+                className="border-2 border-cyan-400 outline-cyan-400  p-2 rounded-md"
                 type="number"
                 name="duration"
               />
@@ -127,7 +127,7 @@ const CreateEventForm = () => {
                 component="div"
               />
               <button
-                className="border-2 w-48 p-2 rounded-md mx-auto disabled:border-none disabled:bg-white bg-cyan-400"
+                className="border-2 text-slate-800 border-cyan-400 outline-cyan-400  w-48 p-2 rounded-md mx-auto border-none shadow-slate-700 disabled:bg-white bg-cyan-300"
                 type="submit"
                 disabled={isSubmitting}
               >

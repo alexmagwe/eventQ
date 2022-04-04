@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ControlledInputType } from "./components/event/types";
 import { auth } from "./firebase/client";
-export const useControlledInput: any = () => {
+export const useControlledInput: any = (): ControlledInputType => {
   const [value, setValue] = useState("");
   const handleChange: any = (e) => {
     setValue(e.target.value);

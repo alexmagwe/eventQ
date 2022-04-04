@@ -11,7 +11,7 @@ function NavBar({}: Props) {
   }
   
   return (
-    <div className='flex  text-inherit px-16 py-8 justify-between w-full'>
+    <div className='flex  text-inherit px-16 py-8 justify-between items-center w-full'>
         <Link href='/'>
         <a className='text-2xl font-sans font-bold'>eventQ</a>
         </Link>

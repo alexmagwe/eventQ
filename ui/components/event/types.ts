@@ -1,7 +1,12 @@
+import { DocumentData } from 'firebase/firestore';
 export type _Event = {
-  info: { name: string; startTime: Date |null ; code: string; host: string } ;
-  questions: Question[];
+  info: DocumentData|undefined ;
+  questions: DocumentData[]|undefined;
 };
+export type ControlledInputType={
+  handleChange:(e:any)=>void
+  value:string
+}
 export type Question = {
   questionId:string
   data: {
