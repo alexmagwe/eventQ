@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ControlledInputType } from "./components/event/types";
 import { auth } from "./firebase/client";
-export const useControlledInput: any = (): ControlledInputType => {
-  const [value, setValue] = useState("");
+export const useControlledInput: any = (intialValue:string): ControlledInputType => {
+  const [value, setValue] = useState(intialValue);
   const handleChange: any = (e) => {
     setValue(e.target.value);
   };
-  return { handleChange, value };
+  return { handleChange,setValue, value };
 };
 export const useWithAuth = (pageRoute: string) => {
   const [user, loading] = useAuthState(auth);

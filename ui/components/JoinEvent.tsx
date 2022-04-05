@@ -81,9 +81,4 @@ function JoinEvent() {
 }
 
 export default JoinEvent;
-function updateCollection(
-  q: Query<DocumentData>,
-  arg1: { users: string | null | undefined }
-) {
-  throw new Error("Function not implemented.");
-}
+
