@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import { useContext } from "react";
 import { eventContext } from "../context";
 import { _Event } from "./event/types";
+import CurrentEvent from "./CurrentEvent";
 let socket: any;
 type Props = {};
 
@@ -30,16 +31,7 @@ function Hero({}: Props) {
           </div>
         </div>
         {currentEvent && (
-          <div className=" mt-4 md:mt-8">
-            <h1 className="text-2xl capitalize font-sans ">Recent events</h1>
-            <Link href={`/e/${currentEvent.code}`} passHref>
-              <div className="bg-slate-700 my-4 cursor-pointer w-min rounded-lg p-8 py-8">
-                <h1 className="text-2xl  capitalize font-bold font-sans">
-                  {currentEvent.name}
-                </h1>
-              </div>
-            </Link>
-          </div>
+         <CurrentEvent currentEvent={currentEvent}/>
         )}
       </div>
     </>

@@ -56,11 +56,11 @@ function JoinEvent() {
         className="flex flex-col justify-center items-center"
         onSubmit={joinEvent}
       >
-        <h1 className="text-6xl font-extrabold text-transparent text-center bg-clip-text bg-gradient-to-br from-purple-500 to-orange-500 ">
+        <h1 className="text-6xl font-extrabold text-transparent text-center bg-clip-text bg-gradient-to-br from-cyan-500 to-purple-800 ">
           Enter event code
         </h1>
         <input
-          className="border-b-2 border-pink-500  p-2 bg-transparent mt-4 outline-none font-sans text-3xl text-center"
+          className="border-b-4 border-purple-600  p-2 bg-transparent mt-4 outline-none font-sans text-3xl text-center"
           type="text"
           autoFocus={true}
           maxLength={6}
@@ -71,7 +71,7 @@ function JoinEvent() {
 
         <button
           type="submit"
-          className="bg-gradient-to-br from-orange-500 to-purple-600 text-white w-full mt-8 p-2 rounded-md outline-none  text-3xl text-center"
+          className="bg-gradient-to-br from-cyan-500 to-blue-800 text-white w-full mt-8 p-2 rounded-md outline-none  text-3xl text-center"
         >
           Join
         </button>

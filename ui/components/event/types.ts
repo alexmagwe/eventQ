@@ -1,5 +1,5 @@
 import { DocumentData, QueryDocumentSnapshot, Timestamp } from 'firebase/firestore';
-import { Dispatch, MouseEventHandler, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 export type _Event = {
   info: DocumentData|undefined|EventInfo ;
   questions: DocumentData[]|undefined|QuestionSchema[];
@@ -10,6 +10,7 @@ export type EventInfo={
   name:string
 location:string
 date:string
+uid:string
 time:string
 duration:number
 code:string

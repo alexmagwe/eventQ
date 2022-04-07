@@ -28,6 +28,9 @@ import { toast, ToastContainer } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import AskForm from "./qna/askForm";
+import { FaUsers } from "react-icons/fa";
+import { GrStatusGoodSmall } from "react-icons/gr";
+import Members from "./Members";
 type Props = {
   eventCode: string;
 };
@@ -143,32 +146,33 @@ function Main(props: Props) {
       <ToastContainer />
       <div className="p-2 md:px-12 relative h-full">
         {eventData && (
-          <h1 className=" bg-clip-text mb-2 text-transparent capitalize  bg-gradient-to-br from-purple-600 text-center font-bold to-orange-400 text-5xl">
+          <h1 className=" bg-clip-text mb-2 text-transparent capitalize  bg-gradient-to-br from-cyan-400 text-center font-bold to-blue-600 text-5xl">
             {eventData && eventData.name}
           </h1>
         )}
-        <div className="grid grid-cols-2 md:grid-cols-5  w-full h-full grid-rows-3 gap-4">
-          <div className="row-span-1 md:row-span-3 col-span-1">
-            <h2>
-              Members online
-              <span className=" text-6xl rounded-full text-green-400 ">.</span>
-            </h2>
-            <ul className="flex flex-col gap-2 ">
-              {members &&
-                members.map((member, i) => (
-                  <li key={i}>{member.data().name}</li>
-                ))}
-            </ul>
+        <div className="grid grid-cols-1 overflow-auto md:grid-cols-5  w-full h-full grid-rows-4 md:grid-rows-3 gap-4">
+          <div className="row-span-1 hidden md:block row-start-4 md:row-start-1 md:row-span-3 md:col-start-1 col-span-1">
+            <p className="text-xl flex gap-2  text-green-300 font-mono my-2 font-bold">
+              <span className="text-2xl">
+                <FaUsers />
+                </span>
+              <span>Members</span>
+            </p>
+          <Members members={members}/>
           </div>
-          {event.questions && (
-            <div className="row-span-2 col-span-2 md:col-span-4">
-              <h1 className="p-2 px-8 text-xl text-bold text-slate-200">
+          {event.questions && event.questions.length > 0 ? (
+            <div className="row-span-2  md:col-span-4">
+              <h1 className="p-2 px-8 text-2xl font-extrabold ">
                 Questions
               </h1>
               <QnA eventCode={props.eventCode} />
             </div>
+          ) : (
+            <h1 className="text-center md:col-span-3 md:row-start-1  md:col-start-2 self-end text-6xl font-mono font-extrabold ">
+              Ask a question?
+            </h1>
           )}
-          <div className="  row-start-3  col-span-3 md:col-start-2 md:col-span-3">
+          <div className="  row-start-4 md:col-span-3 self-start md:row-start-3 md:col-start-2">
             <AskForm handleSubmit={handleSubmit} />
           </div>
         </div>

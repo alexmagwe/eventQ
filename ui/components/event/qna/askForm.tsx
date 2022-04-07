@@ -38,7 +38,7 @@ const AskForm = (props: Props) => {
         ></input>
         <button
           type="submit"
-          className="bg-orange-600 w-1/5 border-2 hover:bg-orange-500 p-2 rounded-r-3xl md:px-8 text-black flex justify-center items-center"
+          className="bg-gradient-to-tr from-blue-600 to-blue-800 w-1/5 border-2 hover:bg-orange-500 p-2 rounded-r-3xl md:px-8 text-black flex justify-center items-center"
         >
           <AiOutlineSend color="#fff" size={25} />
         </button>

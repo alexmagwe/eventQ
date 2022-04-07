@@ -26,6 +26,9 @@ function NavBar({}: Props) {
         <li>Join</li>
           </a>
         </Link>
+          {user&&<Link href='/manage'>
+        Manage
+          </Link>}
           {user&&<li className='cursor-pointer' onClick={logOut}>
         Logout
           </li>}

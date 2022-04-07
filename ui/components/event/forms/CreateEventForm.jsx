@@ -7,12 +7,13 @@ import { generateCode } from "../../../lib/index";
 import { eventsCollection } from "../../../firebase/collections";
 import { toast, ToastContainer } from "react-toastify";
 import { EventForm, EventFormErrors } from "../types";
+import { useRouter } from 'next/router';
 
 const CreateEventForm = () => {
     const [user] = useAuthState(auth);
+    const router=useRouter()
 
     const saveEvent = async payload => {
-      console.log('saving...');
       try {
         const res = await setDoc(doc(eventsCollection, payload.code), { ...payload });
         toast.success("Event Created succesfully");
@@ -20,6 +21,7 @@ const CreateEventForm = () => {
       catch (err) {
         toast.error('Error occured while creating event ,try again');
       }
+      router.push(`/details/${payload.code}`)
     };
 
     return (
@@ -59,7 +61,7 @@ const CreateEventForm = () => {
           onSubmit={(values, { setSubmitting }) => {
             // if Date.now()values.date
             let eventCode = generateCode();
-            let payload = { ...values, code: eventCode };
+            let payload = { ...values, code: eventCode,creator:user.uid };
             saveEvent(payload);
 
             setTimeout(() => {

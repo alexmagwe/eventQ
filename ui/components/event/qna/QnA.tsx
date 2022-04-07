@@ -30,7 +30,7 @@ toast.success('deleted successfully')
 return (
   <div className={styles.questionsContainer}>
 
-  <div className=" m-4 p-2 grid max-h-full grid-cols-2 gap-2 md:gap-4 xl:gap-8 ">
+  <div className=" m-4 p-2 flex flex-col  md:grid max-h-full md:grid-cols-2 gap-4 md:gap-4 xl:gap-8 ">
     
     {event.questions && (
       event.questions.map((q,i)=><Question key={i} handleDelete={handleDelete} index={i+1} data={q.data()} questionId={q.id} />))}
