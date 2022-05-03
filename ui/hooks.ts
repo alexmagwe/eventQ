@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ControlledInputType } from "./components/event/types";
 import { auth } from "./firebase/client";
 export const useControlledInput: any = (intialValue:string): ControlledInputType => {
   const [value, setValue] = useState(intialValue);
-  const handleChange: any = (e) => {
+  const handleChange: any = (e:React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
   return { handleChange,setValue, value };
