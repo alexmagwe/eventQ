@@ -3,6 +3,7 @@ import { EventInfo } from "../types";
 import { DocumentData } from "firebase/firestore";
 import {useRouter} from "next/router";
 import { FiEdit2 } from "react-icons/fi";
+import Link from 'next/link';
 
 type Props = {
   eventData: EventInfo | DocumentData;
@@ -20,7 +21,8 @@ const Event = (props: Props) => {
       <h2 className="text-3xl flex gap-4 justify-between capitalize">Date ~ {eventData!.date}<span className="text-orange-400"><FiEdit2 size={20}/></span></h2>
       <h2 className="text-3xl flex gap-4 justify-between capitalize">Time ~ {eventData!.time}<span className="text-orange-400"><FiEdit2 size={20}/></span></h2>
       <h2 className="text-3xl flex gap-4  justify-between capitalize">Duration ~ {eventData!.duration} Hours<span className="text-orange-400"><FiEdit2 size={20}/></span></h2>
-     
+      <h2 className="text-3xl flex gap-4  justify-between capitalize">Code ~ {eventData!.code} <span className="text-orange-400"><Link href={`/e/${eventData!.code}`}><a className="p-2 border-sky-200 ">Go</a></Link></span></h2>
+
     </li>
   );
 };
