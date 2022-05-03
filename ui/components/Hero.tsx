@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { io } from "socket.io-client";
 import { useContext } from "react";
 import { eventContext } from "../context";
 import { _Event } from "./event/types";

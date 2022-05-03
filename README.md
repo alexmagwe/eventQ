@@ -1,2 +1,2 @@
 # eventQ
-Ask Questions in Events easily
+Realtime QnA website for events 
