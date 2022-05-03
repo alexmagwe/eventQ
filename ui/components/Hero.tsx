@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { eventContext } from "../context";
 import { _Event } from "./event/types";
 import CurrentEvent from "./CurrentEvent";
-let socket: any;
 type Props = {};
 
 function Hero({}: Props) {
