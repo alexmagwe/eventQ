@@ -70,7 +70,7 @@ const CreateEventForm = () => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className="text-black  flex flex-col md:w-2/3 sm:w-4/5 lg:w-1/2 mx-auto md:gap-2 2xl:gap-4">
+            <Form className="text-black  flex flex-col md:w-2/3 w-4/5 lg:w-1/2 mx-auto md:gap-2 2xl:gap-4">
               <span className="text-white font-normal">Event name</span>
               <Field
                 className="border-2 border-cyan-400 outline-cyan-400  p-2  capitalize rounded-md text-slate-800"
@@ -129,7 +129,7 @@ const CreateEventForm = () => {
                 component="div"
               />
               <button
-                className="border-2 text-slate-800 border-cyan-400 outline-cyan-400  w-48 p-2 rounded-md mx-auto border-none shadow-slate-700 disabled:bg-white bg-cyan-300"
+                className="border-2 text-white mt-4 border-cyan-400 outline-cyan-400  w-48 p-2 rounded-md mx-auto border-none shadow-slate-700 disabled:bg-white bg-blue-500"
                 type="submit"
                 disabled={isSubmitting}
               >
