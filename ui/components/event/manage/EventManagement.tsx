@@ -15,11 +15,15 @@ import Event from "./Event";
 import { auth, db } from "../../../firebase/client";
 import { eventsCollection } from "../../../firebase/collections";
 import { EventInfo } from "../types";
+import { useWithAuth } from "../../../hooks";
+import { useRouter } from 'next/router';
 
 type Props = {};
 
 function EventManagement({}: Props) {
   const [user, loading] = useAuthState(auth);
+  const router=useRouter()
+  useWithAuth(router.pathname)
   const [myEvents, setMyEvents] = useState<
     QueryDocumentSnapshot<DocumentData>[] | undefined
   >();
@@ -44,10 +48,10 @@ function EventManagement({}: Props) {
         </ul>
       ) : (
         <div>
-          <h1 className="text-6xl font-extrabold text-center m-4 mx-auto pt-12">
+          <h1 className="text-6xl font-extrabold text-center m-4 pt-12">
             No events created
           </h1>
-          <div className="p-4 lg:text-lg lg:px-8 w-56 bg-cyan-400  hover:bg-cyan-300 hover:cursor-pointer shadow-slate-800 rounded-lg flex justify-center items-center">
+          <div className="p-4 lg:text-lg lg:px-8 w-56 bg-cyan-400  mx-auto hover:bg-cyan-300 hover:cursor-pointer shadow-slate-800 rounded-lg flex justify-center items-center">
             <Link href="/create" passHref>
               <a>Create Event</a>
             </Link>

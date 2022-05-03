@@ -10,7 +10,7 @@ function Question(props: Question) {
     const {data}=props
 
   return (
-   <p className={`flex md:max-w-xs font-mono xl:max-w-lg 2xl:max-w-xl relative xl:p-4 2xl:px-8  2xl:pt-4 2xl:pb-8 bg-gradient-to-r ${data.userName==user?.displayName?'from-green-500 to-green-800': 'from-blue-500 to-blue-800'} p-4 rounded-xl flex-col gap-2`}>
+   <p className={`flex md:max-w-xs font-mono xl:max-w-lg 2xl:max-w-xl relative xl:p-4 2xl:px-8  2xl:pt-4 2xl:pb-8 bg-gradient-to-r from-blue-600 to-blue-800  ${data.userName==user?.displayName?'border-2 border-green-500': ''} p-4 rounded-xl flex-col gap-2`}>
        <span className='text-md text-slate-300 bg-slate-700 rounded-full p-1 lg:text-lg absolute top-2 left-2'>{props.index}</span>
        <span className='text-md text-slate-300  text-right'>{data.userName}</span>
        <span className='text-xl text-center capitalize md:text-xl xl:text-3xl'>{data.description}</span>
