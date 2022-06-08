@@ -4,7 +4,6 @@ import { auth } from "../../firebase/client";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
 type Props = {};
-
 function NavDrawer({}: Props) {
   const user = useAuthState(auth)[0];
   const [openDrawer, setOpenDrawer] = useState(false);
