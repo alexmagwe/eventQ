@@ -6,11 +6,11 @@ export type _Event = {
 
 };
 export type EventInfo={
-  id:string
   name:string
 location:string
 date:string
-uid:string
+allowedSpeakers:string[]
+creator:string
 time:string
 duration:number
 code:string
@@ -33,11 +33,9 @@ export type Question = {
   handleDelete:Function
   questionId:string
   data: {
-    description: string;
-    answered: boolean;
     createdAt:Timestamp
-    answer: string | null;
     userName: string;
+    userId:string
   };
 };
 export type QuestionSchema = {

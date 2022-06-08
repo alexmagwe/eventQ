@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import QnA from "./qna/QnA";
-import { Question, _Event } from "./types";
+import { EventInfo, Question, QuestionSchema, _Event } from "./types";
 import { eventContext } from "../../context";
 import { EVENTS, MEMBERS, QUESTIONS } from "../../constants";
 import {
@@ -8,9 +8,11 @@ import {
   collection,
   deleteDoc,
   doc,
+  updateDoc,
   query,
+  getDoc,
   limit,
-  Timestamp,
+  arrayUnion,
   DocumentData,
   onSnapshot,
   orderBy,
@@ -28,9 +30,12 @@ import { toast, ToastContainer } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import AskForm from "./qna/askForm";
-import { FaUsers } from "react-icons/fa";
+import { FaMicrophone, FaUsers } from "react-icons/fa";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import Members from "./Members";
+import AskButton from "./qna/askButton";
+import Timeline from "./Timeline";
+import MicButton from "./MicButton";
 type Props = {
   eventCode: string;
 };
@@ -40,48 +45,45 @@ function Main(props: Props) {
   const [members, setMembers] = useState<QueryDocumentSnapshot<DocumentData>[]>(
     []
   );
-
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
   const eventRef = doc(eventsCollection, props.eventCode);
-  const { data: eventData } = useFirestoreDocumentData<DocumentData>(
+  const { data: eventData } = useFirestoreDocumentData<DocumentData|EventInfo>(
     [EVENTS, props.eventCode],
     eventRef
   );
-  const handleSubmit = async (message: string) => {
-    const questionsCollection = collection(
-      db,
-      EVENTS,
-      props.eventCode,
-      QUESTIONS
-    );
+  const handleClick = async () => {
+    const memberDoc = doc(db, EVENTS, props.eventCode, MEMBERS, user!.uid);
+    const memberSnap = await getDoc(memberDoc);
 
     try {
-      const payload: Question["data"] = {
-        description: message,
-        answered: false,
-        createdAt: Timestamp.now(),
-        answer: null,
-        userName: user!.displayName as string,
-      };
-      let count = 0;
-      event.questions!.map((q) => {
-        if (q.data().userName == user?.displayName) {
-          count += 1;
-        }
+      // const payload: Question["data"] = {
+      //   createdAt: Timestamp.now(),
+      //   userName: user!.displayName as string,
+      //   userId:user!.uid
+      // };
+      await updateDoc(memberDoc, {
+        hasQuestion: memberSnap.data()!.hasQuestion ? false : true,
       });
-      if (count > 1) {
-        toast.warning(
-          "You can only ask a maximum of two questions,to ask another question, delete your original question"
-        );
-        return;
-      }
-      const docref = await addDoc(questionsCollection, payload);
+      // await updateDoc(memberDoc, {hasQuestion:memberSnap.data().hasQtrue});
     } catch (err) {
       console.log(err);
       toast.error("something went wrong");
     }
   };
+  const handleAllowButton=async(uid:string)=>{
+    try{
+
+      await updateDoc(eventRef,{allowedSpeakers:arrayUnion(uid),})
+      toast.success("member allowed to speak");
+    }
+    catch(e){
+      toast.error(`${e}`);
+
+    }
+
+
+  }
   useEffect(() => {
     let unsubscribeMembers: Function = () => {};
     let unsubscribeQuestions: Function = () => {};
@@ -105,6 +107,11 @@ function Main(props: Props) {
     } catch (err) {
       unsubscribeMembers();
       unsubscribeQuestions();
+    }
+    return ()=>{
+      unsubscribeMembers();
+      unsubscribeQuestions();
+
     }
   }, [event.setQuestions, props.eventCode]);
 
@@ -146,34 +153,21 @@ function Main(props: Props) {
       <ToastContainer />
       <div className="p-2 md:px-12 relative h-full">
         {eventData && (
-          <h1 className=" bg-clip-text mb-2 text-transparent capitalize  bg-gradient-to-br from-cyan-400 text-center font-bold to-blue-600 text-5xl">
+          <h1 className=" bg-clip-text mb-2 text-transparent capitalize bg-gradient-to-br from-cyan-400 text-center font-bold to-blue-600 text-5xl">
             {eventData && eventData.name}
           </h1>
         )}
-        <div className="grid grid-cols-1 overflow-auto md:grid-cols-5  w-full h-full grid-rows-4 md:grid-rows-3 gap-4">
-          <div className="row-span-1 hidden md:block row-start-4 md:row-start-1 md:row-span-3 md:col-start-1 col-span-1">
-            <p className="text-xl flex gap-2  text-green-300 font-mono my-2 font-bold">
-              <span className="text-2xl">
-                <FaUsers />
-                </span>
-              <span>Members</span>
-            </p>
-          <Members members={members}/>
+        <div className=" flex w-full  my-2 gap-4">
+          <div className="w-1/4">
+            <Members members={members} user={user} eventInfo={eventData} handleAllowButton={handleAllowButton}/>
           </div>
-          {event.questions && event.questions.length > 0 ? (
-            <div className="row-span-2  md:col-span-4">
-              <h1 className="p-2 px-8 text-2xl font-extrabold ">
-                Questions
-              </h1>
-              <QnA eventCode={props.eventCode} />
-            </div>
-          ) : (
-            <h1 className="text-center md:col-span-3 md:row-start-1  md:col-start-2 self-end text-6xl font-mono font-extrabold ">
-              Ask a question?
-            </h1>
-          )}
-          <div className="  row-start-4 md:col-span-3 self-start md:row-start-3 md:col-start-2">
-            <AskForm handleSubmit={handleSubmit} />
+          <Timeline />
+        </div>
+        <div className="flex absolute bottom-32 w-full justify-center ">
+          <div className="p-4 rounded-full active:bg-green-500 transition-colors duration-200 flex justify-center items-center bg-blue-600 ">
+          {!eventData?.allowedSpeakers?.includes(user?.uid)?<AskButton handleClick={handleClick} />:
+           <MicButton/>
+          }
           </div>
         </div>
       </div>

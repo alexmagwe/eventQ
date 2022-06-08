@@ -61,7 +61,7 @@ const CreateEventForm = () => {
           onSubmit={(values, { setSubmitting }) => {
             // if Date.now()values.date
             let eventCode = generateCode();
-            let payload = { ...values, code: eventCode,creator:user.uid };
+            let payload = { ...values, code: eventCode,creator:user.uid,allowedList:[user.uid] };
             saveEvent(payload);
 
             setTimeout(() => {
